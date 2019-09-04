@@ -32,25 +32,28 @@
 		}
 	} else { // $method == "POST"
 		$results = array();
-		$age = isset($_POST['age']) ? $_POST['age'] : null;
-		$weight = isset($_POST['weight']) ? $_POST['weight'] : null;
-		if(isset($age) && isset($weight)) {
-			foreach ($sinhviens as $key => $sinhvien) {
-				$sinhvien_age = $sinhvien['age'];
-				$sinhvien_weight = $sinhvien['weight'];
-				if($age == $sinhvien_age && $weight == $sinhvien_weight) {
-					$total_age += $sinhvien_age;
-					$total_weight += $sinhvien_weight;
-					$results[] = $sinhvien;
-				}
+		$age = isset($_POST['age']) && !empty($_POST['age']) ? $_POST['age'] : true;
+		$weight = isset($_POST['weight'])&& !empty($_POST['weight']) ? $_POST['weight'] : true;
+		foreach ($sinhviens as $key => $sinhvien) {
+			$sinhvien_age = $sinhvien['age'];
+			$sinhvien_weight = $sinhvien['weight'];
+
+			if($sinhvien_age == $age && $sinhvien_weight == $weight) {
+				$total_age += $sinhvien_age;
+				$total_weight += $sinhvien_weight;
+				$results[] = $sinhvien;
 			}
-			$sinhviens = $results;
 		}
+		$sinhviens = $results;
 	}
 	$total_records = count($sinhviens);
-
-	$average_age = $total_age / $total_records;
-	$average_weight = $total_weight / $total_records;	
+	if($total_records == 0) {
+		$average_age = 0;
+		$average_weight = 0;
+	} else {
+		$average_age = $total_age / $total_records;
+		$average_weight = $total_weight / $total_records;
+	}	
 
 
 ?>
@@ -84,12 +87,14 @@ tr:nth-child(even) {
 	<form action="" method="POST">
 		<label>Age</label>
 		<select name="age">
+			<option value=""></option>
 			<option value="18">18</option>
 			<option value="19">19</option>
 			<option value="20">20</option>
 		</select>
 		<label>Weight</label>
 		<select name="weight">
+			<option value=""></option>
 			<option value="50">50</option>
 			<option value="55">55</option>
 			<option value="60">60</option>
