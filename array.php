@@ -87,17 +87,17 @@ tr:nth-child(even) {
 	<form action="" method="POST">
 		<label>Age</label>
 		<select name="age">
-			<option value=""></option>
-			<option value="18">18</option>
-			<option value="19">19</option>
-			<option value="20">20</option>
+			<option value="" <?php echo isset($age)&&$age===true ? "selected" : null ?>></option>
+			<option value="18" <?php echo (isset($age)&&$age==="18") ? "selected" : null ?>>18</option>
+			<option value="19" <?php echo (isset($age)&&$age === "19") ? "selected" : null ?>>19</option>
+			<option value="20" <?php echo (isset($age)&&$age === "20") ? "selected" : null ?>>20</option>
 		</select>
 		<label>Weight</label>
 		<select name="weight">
-			<option value=""></option>
-			<option value="50">50</option>
-			<option value="55">55</option>
-			<option value="60">60</option>
+			<option value="" <?php echo isset($weight) ? "selected" : null ?>></option>
+			<option value="50" <?php echo (isset($weight) && $weight === "50") ? "selected" : null ?>>50</option>
+			<option value="55" <?php echo (isset($weight) && $weight === "55") ? "selected" : null ?>>55</option>
+			<option value="60" <?php echo (isset($weight) && $weight === "60") ? "selected" : null ?>>60</option>
 		</select>	
 		<input type="submit" name="Search">	
 	</form>
